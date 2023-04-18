@@ -63,7 +63,6 @@ impl GsiAllocator {
     }
 
     #[cfg(target_arch = "aarch64")]
-    #[allow(clippy::new_without_default)]
     /// New GSI allocator
     pub fn new() -> Self {
         GsiAllocator {

@@ -1588,7 +1588,6 @@ impl CpuManager {
 
         // PA or IPA size is determined
         let tcr_ips = extract_bits_64!(tcr_el1, 32, 3);
-        #[allow(clippy::identity_op)]
         let pa_range = extract_bits_64!(id_aa64mmfr0_el1, 0, 4);
         // The IPA size in TCR_BL1 and PA Range in ID_AA64MMFR0_EL1 should match.
         // To be safe, we use the minimum value if they are different.
@@ -1622,7 +1621,6 @@ impl CpuManager {
         let descaddrmask = descaddrmask & !indexmask_grainsize;
 
         // Translation table base address
-        #[allow(clippy::identity_op)]
         let mut descaddr: u64 = extract_bits_64!(ttbr1_el1, 0, 48);
         // In the case of FEAT_LPA and FEAT_LPA2, the initial translation table
         // addresss bits [48:51] comes from TTBR1_EL1 bits [2:5].
@@ -1729,7 +1727,6 @@ impl Aml for Cpu {
     fn to_aml_bytes(&self, sink: &mut dyn acpi_tables::AmlSink) {
         #[cfg(target_arch = "x86_64")]
         let mat_data: Vec<u8> = self.generate_mat();
-        #[allow(clippy::if_same_then_else)]
         if self.dynamic {
             aml::Device::new(
                 format!("C{:03}", self.cpu_id).as_str().into(),
