@@ -573,6 +573,10 @@ fn start_vmm(toplevel: TopLevel) -> Result<Option<String>, Error> {
         .map_err(Error::ThreadJoin)?
         .map_err(Error::VmmThread)?;
 
+    if let Err(e) = r {
+        return Err(e);
+    }
+
     Ok(api_socket_path)
 }
 
